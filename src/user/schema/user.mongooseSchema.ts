@@ -1,7 +1,7 @@
 import { Document, Schema } from 'mongoose';
 
 export const UserSchema = new Schema({
-  username: {
+  userName: {
     type: String,
     required: true,
   },
@@ -15,8 +15,8 @@ export const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
+    enum: ['USER', 'ADMIN', 'BUSINESS'],
+    default: 'USER',
   },
   createdAt: {
     type: Date,
@@ -26,12 +26,18 @@ export const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  isActive: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 });
 export interface UserDocument extends Document {
-  username: string;
+  userName: string;
   email: string;
   password: string;
-  role: 'user' | 'admin';
+  role: 'USER' | 'ADMIN' | 'BUSINESS';
   createdAt: Date;
   updatedAt: Date;
+  isActive: boolean;
 }
